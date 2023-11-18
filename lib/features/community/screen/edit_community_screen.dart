@@ -6,6 +6,7 @@ import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
 import 'package:flutter_reddit_clone/features/community/controller/community_controller.dart';
+import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -46,6 +47,17 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     }
   }
 
+  void save(
+    Community community,
+  ) {
+    ref.read(communityControllerProvider.notifier).editComunity(
+          profileFile: profileFile,
+          bannerFile: bannerFile,
+          community: community,
+          context: context,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
@@ -56,7 +68,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
               centerTitle: false,
               actions: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => save(data),
                   child: const Text("Save"),
                 ),
               ],
