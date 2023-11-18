@@ -7,6 +7,12 @@ import 'package:flutter_reddit_clone/core/utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
+final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
+  return ref
+      .watch(communityControllerProvider.notifier)
+      .getCommunityByName(name);
+});
+
 final userCommunitiesProvider = StreamProvider(
   (ref) {
     final communityController = ref.watch(communityControllerProvider.notifier);
@@ -61,5 +67,9 @@ class CommunityController extends StateNotifier<bool> {
   Stream<List<Community>> getUserCommunities() {
     final uid = _ref.read(userProvider)!.uid;
     return _communityRepository.getUserCommunity(uid);
+  }
+
+  Stream<Community> getCommunityByName(String name) {
+    return _communityRepository.getCommunityByName(name);
   }
 }
