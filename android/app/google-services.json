@@ -12,7 +12,20 @@
           "package_name": "com.example.flutter_reddit_clone"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "705772185505-sptk8q1s3uu4hmscq6945vb9b15l2m95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_reddit_clone",
+            "certificate_hash": "43d9e17d008785a6b755285334d9fbd4287e6e8c"
+          }
+        },
+        {
+          "client_id": "705772185505-d535d8rvf9oimlo479917u3hefn94pl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA9uk6fKMroQ6oOhHTG31BNlPUg_MoT6s4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705772185505-d535d8rvf9oimlo479917u3hefn94pl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
