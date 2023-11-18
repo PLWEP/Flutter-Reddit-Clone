@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_reddit_clone/features/auth/screen/login_screen.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 
 void main() {
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Reddit Clone',
       theme: Pallete.darkModeAppTheme,
-      home: const SizedBox(),
+      debugShowCheckedModeBanner: false,
+      home: const LoginScreen(),
     );
   }
 }
