@@ -23,6 +23,13 @@ final userCommunitiesProvider = StreamProvider(
   },
 );
 
+final searchCommunitiesProvider = StreamProvider.family(
+  (ref, String query) {
+    final communityController = ref.watch(communityControllerProvider.notifier);
+    return communityController.searchCommunity(query);
+  },
+);
+
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, bool>(
   (ref) {
@@ -121,5 +128,9 @@ class CommunityController extends StateNotifier<bool> {
       (l) => showSnackBar(context, l.message),
       (r) => Routemaster.of(context).pop(),
     );
+  }
+
+  Stream<List<Community>> searchCommunity(String query) {
+    return _communityRepository.searchCommunity(query);
   }
 }
