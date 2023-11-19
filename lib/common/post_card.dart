@@ -2,6 +2,7 @@ import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:flutter_reddit_clone/features/post/controller/post_controller.dart';
 import 'package:flutter_reddit_clone/models/post_model.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,10 @@ class PostCard extends ConsumerWidget {
     super.key,
     required this.post,
   });
+
+  void deletePost(BuildContext context, WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).deletePost(context, post);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,7 +82,7 @@ class PostCard extends ConsumerWidget {
                               ),
                               if (post.uid == user.uid)
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () => deletePost(context, ref),
                                   icon: const Icon(
                                     Icons.delete,
                                     color: Colors.red,
@@ -105,9 +110,9 @@ class PostCard extends ConsumerWidget {
                               ),
                             ),
                           if (isTypeLink)
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.35,
-                              width: double.infinity,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18),
                               child: AnyLinkPreview(
                                 displayDirection:
                                     UIDirection.uiDirectionHorizontal,
