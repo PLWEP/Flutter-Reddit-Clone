@@ -55,4 +55,40 @@ class PostRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  void upvote(Post post, String userId) async {
+    if (post.downVotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'downVotes': FieldValue.arrayRemove([userId]),
+      });
+    }
+
+    if (post.upVotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'upVotes': FieldValue.arrayRemove([userId]),
+      });
+    } else {
+      _posts.doc(post.id).update({
+        'upVotes': FieldValue.arrayUnion([userId]),
+      });
+    }
+  }
+
+  void downvote(Post post, String userId) async {
+    if (post.upVotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'upVotes': FieldValue.arrayRemove([userId]),
+      });
+    }
+
+    if (post.downVotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'downVotes': FieldValue.arrayRemove([userId]),
+      });
+    } else {
+      _posts.doc(post.id).update({
+        'downVotes': FieldValue.arrayUnion([userId]),
+      });
+    }
+  }
 }

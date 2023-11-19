@@ -18,6 +18,14 @@ class PostCard extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).deletePost(context, post);
   }
 
+  void upvotePost(WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).upvote(post);
+  }
+
+  void downvotePost(WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).downvote(post);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTypeImage = post.type == 'image';
@@ -136,7 +144,7 @@ class PostCard extends ConsumerWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () => upvotePost(ref),
                                     icon: Icon(
                                       Constant.up,
                                       size: 30,
@@ -152,7 +160,7 @@ class PostCard extends ConsumerWidget {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () => downvotePost(ref),
                                     icon: Icon(
                                       Constant.down,
                                       size: 30,
