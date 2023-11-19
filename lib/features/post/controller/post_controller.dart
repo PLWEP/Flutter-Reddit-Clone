@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_reddit_clone/core/provider/storage_repository_provider.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:flutter_reddit_clone/features/post/repository/post_repository.dart';
+import 'package:flutter_reddit_clone/models/comment_model.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_reddit_clone/models/post_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +30,16 @@ final postControllerProvider = StateNotifierProvider<PostController, bool>(
     );
   },
 );
+
+final getPostByIdProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.getPostById(postId);
+});
+
+final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchPostComments(postId);
+});
 
 class PostController extends StateNotifier<bool> {
   final PostRepository _postRepository;
@@ -190,5 +201,35 @@ class PostController extends StateNotifier<bool> {
   void downvote(Post post) async {
     final user = _ref.read(userProvider)!;
     _postRepository.downvote(post, user.uid);
+  }
+
+  Stream<Post> getPostById(String postId) {
+    return _postRepository.getPostById(postId);
+  }
+
+  void addComment({
+    required BuildContext context,
+    required String text,
+    required Post post,
+  }) async {
+    String commentId = const Uuid().v1();
+    final user = _ref.read(userProvider)!;
+    final comment = Comment(
+      id: commentId,
+      text: text,
+      createdAt: DateTime.now(),
+      postId: post.id,
+      username: user.name,
+      profilePic: user.profilePic,
+    );
+    final res = await _postRepository.addComment(comment);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => null,
+    );
+  }
+
+  Stream<List<Comment>> fetchPostComments(String postId) {
+    return _postRepository.getCommentsOfPost(postId);
   }
 }
