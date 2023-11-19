@@ -11,6 +11,13 @@ import 'package:routemaster/routemaster.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
 
+final userPostProvider = StreamProvider.family(
+  (ref, List<Community> communities) {
+    final postController = ref.watch(postControllerProvider.notifier);
+    return postController.fetchUserPost(communities);
+  },
+);
+
 final postControllerProvider = StateNotifierProvider<PostController, bool>(
   (ref) {
     final postRepository = ref.watch(postRepositoryProvider);
@@ -139,7 +146,7 @@ class PostController extends StateNotifier<bool> {
           commentCount: 0,
           username: user.name,
           uid: user.uid,
-          type: 'link',
+          type: 'image',
           createdAt: DateTime.now(),
           awards: [],
           link: r,
@@ -156,5 +163,13 @@ class PostController extends StateNotifier<bool> {
         );
       },
     );
+  }
+
+  Stream<List<Post>> fetchUserPost(List<Community> communities) {
+    if (communities.isNotEmpty) {
+      return _postRepository.fetchUserPost(communities);
+    }
+
+    return Stream.value([]);
   }
 }
