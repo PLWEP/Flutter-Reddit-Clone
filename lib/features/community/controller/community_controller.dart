@@ -8,6 +8,7 @@ import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.da
 import 'package:flutter_reddit_clone/features/community/repository/community_repository.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
+import 'package:flutter_reddit_clone/models/post_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
@@ -44,6 +45,10 @@ final communityControllerProvider =
     );
   },
 );
+
+final getCommunityPostProvider = StreamProvider.family((ref, String name) {
+  return ref.read(communityControllerProvider.notifier).getCommunityPost(name);
+});
 
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
@@ -166,5 +171,9 @@ class CommunityController extends StateNotifier<bool> {
       (l) => showSnackBar(context, l.message),
       (r) => Routemaster.of(context).pop(),
     );
+  }
+
+  Stream<List<Post>> getCommunityPost(String name) {
+    return _communityRepository.getCommunityPost(name);
   }
 }
