@@ -72,9 +72,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.read(userProfileControllerProvider);
+    final currentTheme =
+        ref.watch(themeNotifierProvider).colorScheme.background;
     return ref.watch(getUserDataProvider(widget.uid)).when(
           data: (data) => Scaffold(
-            backgroundColor: Pallete.darkModeAppTheme.colorScheme.background,
+            backgroundColor: currentTheme,
             appBar: AppBar(
               title: const Text("Edit Profile"),
               centerTitle: false,
