@@ -3,6 +3,7 @@ import 'package:flutter_reddit_clone/common/error_text.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
 class UserProfileScreen extends ConsumerWidget {
   final String uid;
@@ -10,6 +11,10 @@ class UserProfileScreen extends ConsumerWidget {
     super.key,
     required this.uid,
   });
+
+  void navigateToUserEditProfile(BuildContext context) {
+    Routemaster.of(context).push('/edit-profile/$uid');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +37,8 @@ class UserProfileScreen extends ConsumerWidget {
                         ),
                         Container(
                           alignment: Alignment.bottomLeft,
-                          padding: EdgeInsets.all(20).copyWith(bottom: 70),
+                          padding:
+                              const EdgeInsets.all(20).copyWith(bottom: 70),
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(data.profilePic),
                             radius: 45,
@@ -40,9 +46,9 @@ class UserProfileScreen extends ConsumerWidget {
                         ),
                         Container(
                           alignment: Alignment.bottomLeft,
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: OutlinedButton(
-                            onPressed: () => null,
+                            onPressed: () => navigateToUserEditProfile(context),
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -50,7 +56,7 @@ class UserProfileScreen extends ConsumerWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 25),
                             ),
-                            child: Text("Edit Profle"),
+                            child: const Text("Edit Profle"),
                           ),
                         ),
                       ],
@@ -77,8 +83,8 @@ class UserProfileScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(top: 10),
                             child: Text('${data.karma} karma'),
                           ),
-                          SizedBox(height: 10),
-                          Divider(thickness: 2),
+                          const SizedBox(height: 10),
+                          const Divider(thickness: 2),
                         ],
                       ),
                     ),

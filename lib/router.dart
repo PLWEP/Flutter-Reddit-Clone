@@ -6,6 +6,7 @@ import 'package:flutter_reddit_clone/features/community/screen/create_community_
 import 'package:flutter_reddit_clone/features/community/screen/edit_community_screen.dart';
 import 'package:flutter_reddit_clone/features/community/screen/mod_tools_screen.dart';
 import 'package:flutter_reddit_clone/features/home/screen/home_screen.dart';
+import 'package:flutter_reddit_clone/features/user%20profle/screen/edit_profile_screen.dart';
 import 'package:flutter_reddit_clone/features/user%20profle/screen/user_profile_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -42,6 +43,11 @@ final loggedInRoute = RouteMap(
         ),
     '/u/:uid': (route) => MaterialPage(
           child: UserProfileScreen(
+            uid: route.pathParameters['uid']!,
+          ),
+        ),
+    '/edit-profile/:uid': (route) => MaterialPage(
+          child: EditProfileScreen(
             uid: route.pathParameters['uid']!,
           ),
         ),
