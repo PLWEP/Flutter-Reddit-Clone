@@ -21,23 +21,21 @@ class UserProfileRepository {
     try {
       return right(_users.doc(user.uid).update(user.toMap()));
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return left(Failure(e.message!));
     } catch (e) {
       return left(Failure(e.toString()));
     }
   }
 
-  Stream<List<Post>> getUserPost(String uid) {
-    return _posts
-        .where('uid', isEqualTo: uid)
-        .orderBy('createdAt', descending: true)
-        .snapshots()
-        .map(
-          (event) => event.docs
-              .map((e) => Post.fromMap(e.data() as Map<String, dynamic>))
-              .toList(),
-        );
-  }
+  Stream<List<Post>> getUserPost(String uid) => _posts
+      .where('uid', isEqualTo: uid)
+      .orderBy('createdAt', descending: true)
+      .snapshots()
+      .map(
+        (event) => event.docs
+            .map((e) => Post.fromMap(e.data() as Map<String, dynamic>))
+            .toList(),
+      );
 
   FutureVoid updateUserKarma(UserModel user) async {
     try {
@@ -45,7 +43,7 @@ class UserProfileRepository {
         'karma': user.karma,
       }));
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return left(Failure(e.message!));
     } catch (e) {
       return left(Failure(e.toString()));
     }

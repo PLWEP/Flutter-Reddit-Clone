@@ -18,12 +18,10 @@ class UserProfileScreen extends ConsumerWidget {
       Routemaster.of(context).push('/edit-profile/$uid');
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: ref.watch(getUserDataProvider(uid)).when(
-            data: (data) => NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
+  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
+        body: ref.watch(getUserDataProvider(uid)).when(
+              data: (data) => NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   SliverAppBar(
                     floating: true,
                     snap: true,
@@ -90,24 +88,22 @@ class UserProfileScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-                ];
-              },
-              body: ref.watch(getUserPostProvider(uid)).when(
-                    data: (data) => ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        final post = data[index];
-                        return PostCard(post: post);
-                      },
+                ],
+                body: ref.watch(getUserPostProvider(uid)).when(
+                      data: (data) => ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          final post = data[index];
+                          return PostCard(post: post);
+                        },
+                      ),
+                      error: (error, stackTrace) =>
+                          ErrorText(error: error.toString()),
+                      loading: () => const Loader(),
                     ),
-                    error: (error, stackTrace) =>
-                        ErrorText(error: error.toString()),
-                    loading: () => const Loader(),
-                  ),
+              ),
+              error: (error, stackTrace) => ErrorText(error: error.toString()),
+              loading: () => const Loader(),
             ),
-            error: (error, stackTrace) => ErrorText(error: error.toString()),
-            loading: () => const Loader(),
-          ),
-    );
-  }
+      );
 }

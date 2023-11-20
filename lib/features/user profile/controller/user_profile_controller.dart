@@ -71,9 +71,8 @@ class UserProfileController extends StateNotifier<bool> {
     );
   }
 
-  Stream<List<Post>> getUserPost(String uid) {
-    return _userProfileRepository.getUserPost(uid);
-  }
+  Stream<List<Post>> getUserPost(String uid) =>
+      _userProfileRepository.getUserPost(uid);
 
   void updateUserKarma(UserKarma karma) async {
     UserModel user = _ref.read(userProvider)!;

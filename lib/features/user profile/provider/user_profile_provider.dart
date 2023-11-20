@@ -23,6 +23,5 @@ final userProfileControllerProvider =
   },
 );
 
-final getUserPostProvider = StreamProvider.family((ref, String uid) {
-  return ref.read(userProfileControllerProvider.notifier).getUserPost(uid);
-});
+final getUserPostProvider = StreamProvider.family((ref, String uid) =>
+    ref.read(userProfileControllerProvider.notifier).getUserPost(uid));
