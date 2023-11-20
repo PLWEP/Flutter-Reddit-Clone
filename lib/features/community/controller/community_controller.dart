@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
 import 'package:flutter_reddit_clone/core/failure.dart';
 import 'package:flutter_reddit_clone/core/provider/storage_repository_provider.dart';
-import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:flutter_reddit_clone/features/auth/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/features/community/repository/community_repository.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:flutter_reddit_clone/features/auth/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';

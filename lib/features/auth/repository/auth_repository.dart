@@ -3,20 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
 import 'package:flutter_reddit_clone/core/constant/firebase_constant.dart';
 import 'package:flutter_reddit_clone/core/failure.dart';
-import 'package:flutter_reddit_clone/core/provider/firebase_provider.dart';
 import 'package:flutter_reddit_clone/core/type_def.dart';
 import 'package:flutter_reddit_clone/models/user_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-final authRepositoryProvider = Provider(
-  (ref) => AuthRepository(
-    firestore: ref.read(firestoreProvider),
-    auth: ref.read(authProvider),
-    googleSignIn: ref.read(googleSignInProvider),
-  ),
-);
 
 class AuthRepository {
   final FirebaseFirestore _firestore;
@@ -75,7 +65,7 @@ class AuthRepository {
 
       return right(userModel);
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return left(Failure(e.message!));
     } catch (e) {
       return left(Failure(e.toString()));
     }
@@ -107,7 +97,7 @@ class AuthRepository {
       await _users.doc(userCredential.user!.uid).set(userModel.toMap());
       return right(userModel);
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return left(Failure(e.message!));
     } catch (e) {
       return left(Failure(e.toString()));
     }

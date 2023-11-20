@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_reddit_clone/core/enums.dart';
 import 'package:flutter_reddit_clone/core/provider/storage_repository_provider.dart';
-import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:flutter_reddit_clone/features/auth/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/features/post/repository/post_repository.dart';
 import 'package:flutter_reddit_clone/features/user%20profile/provider/user_profile_provider.dart';
 import 'package:flutter_reddit_clone/models/comment_model.dart';

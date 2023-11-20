@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
-import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:flutter_reddit_clone/features/auth/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/features/home/delegates/search_community_delegates.dart';
 import 'package:flutter_reddit_clone/features/home/drawers/community_list_drawer.dart';
 import 'package:flutter_reddit_clone/features/home/drawers/profile_drawer.dart';

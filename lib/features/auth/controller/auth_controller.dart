@@ -1,32 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_reddit_clone/features/auth/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/features/auth/repository/auth_repository.dart';
 import 'package:flutter_reddit_clone/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
-
-final userProvider = StateProvider<UserModel?>((ref) => null);
-
-final authControllerProvider = StateNotifierProvider<AuthController, bool>(
-  (ref) => AuthController(
-    authRepository: ref.watch(authRepositoryProvider),
-    ref: ref,
-  ),
-);
-
-final authStateChangeProvider = StreamProvider(
-  (ref) {
-    final authController = ref.watch((authControllerProvider.notifier));
-    return authController.authStateChange;
-  },
-);
-
-final getUserDataProvider = StreamProvider.family(
-  (ref, String uid) {
-    final authController = ref.watch((authControllerProvider.notifier));
-    return authController.getUserData(uid);
-  },
-);
 
 class AuthController extends StateNotifier<bool> {
   final AuthRepository _authRepository;
@@ -51,9 +29,7 @@ class AuthController extends StateNotifier<bool> {
 
   Stream<UserModel> getUserData(String uid) => _authRepository.getUserData(uid);
 
-  void logout() {
-    _authRepository.logOut();
-  }
+  void logout() => _authRepository.logOut();
 
   void signInAsGuest(BuildContext context) async {
     state = true;

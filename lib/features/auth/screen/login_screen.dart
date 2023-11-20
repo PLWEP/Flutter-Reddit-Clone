@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/common/sign_in_button.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
-import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:flutter_reddit_clone/features/auth/provider/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
-  void signInAsGuest(WidgetRef ref, BuildContext context) {
-    ref.read(authControllerProvider.notifier).signInAsGuest(context);
-  }
+  void signInAsGuest(WidgetRef ref, BuildContext context) =>
+      ref.read(authControllerProvider.notifier).signInAsGuest(context);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
