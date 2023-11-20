@@ -1,16 +1,40 @@
-# flutter_reddit_clone
+# Flutter Reddit Clone
 
-A new Flutter project.
+[![GitHub issues](https://img.shields.io/github/issues/PLWEP/Flutter-Reddit-Clone?style=for-the-badge)](https://github.com/PLWEP/Flutter-Reddit-Clone/issues)
+[![GitHub forks](https://img.shields.io/github/forks/PLWEP/Flutter-Reddit-Clone?style=for-the-badge)](https://github.com/PLWEP/Flutter-Reddit-Clone/network)
+[![GitHub stars](https://img.shields.io/github/stars/PLWEP/Flutter-Reddit-Clone?style=for-the-badge)](https://github.com/PLWEP/Flutter-Reddit-Clone/stargazers)
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+-   Google Authentication
+-   Create, Join community
+-   Community Profile (Avatar, Banner, Members)
+-   Edit Description and Avatar of community
+-   Post (link only, photo, text only)
+-   Displaying posts from communities user is part of
+-   Upvote, Downvote
+-   Comment
+-   Award the Post
+-   Update Karma
+-   Add Moderators
+-   Moderator- remove post
+-   Delete post
+-   User Profile (Avatar, Banner)
+-   Theme Switch
+-   Responsive UI
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align="left">
+<img src="assets/readme/0.png"  width="150px">
+<img src="assets/readme/1.png"  width="150px">
+<img src="assets/readme/2.png"  width="150px">
+<img src="assets/readme/3.png"  width="150px">
+<img src="assets/readme/4.png"  width="150px">
+<img src="assets/readme/5.png"  width="150px">
+<img src="assets/readme/6.png"  width="150px">
+<img src="assets/readme/7.png"  width="150px">
+<img src="assets/readme/8.png"  width="150px">
+<img src="assets/readme/9.png"  width="150px">
+<img src="assets/readme/10.png"  width="150px">
+</div>
