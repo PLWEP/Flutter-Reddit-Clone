@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/common/error_text.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
+import 'package:flutter_reddit_clone/common/sign_in_button.dart';
+import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:flutter_reddit_clone/features/community/controller/community_controller.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,35 +21,42 @@ class CommunityListDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider)!;
+    final isGuest = !user.isAuthenticated;
+
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
-            ListTile(
-              title: const Text("Create community"),
-              leading: const Icon(Icons.add),
-              onTap: () => navigateToCreateCommunity(context),
-            ),
-            ref.watch(userCommunitiesProvider).when(
-                  data: (data) => Expanded(
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        final community = data[index];
-                        return ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(community.avatar),
-                          ),
-                          title: Text(community.name),
-                          onTap: () => navigateToCommunity(context, community),
-                        );
-                      },
-                    ),
+            isGuest
+                ? const SignInButton()
+                : ListTile(
+                    title: const Text("Create community"),
+                    leading: const Icon(Icons.add),
+                    onTap: () => navigateToCreateCommunity(context),
                   ),
-                  error: (error, stackTrace) =>
-                      ErrorText(error: error.toString()),
-                  loading: () => const Loader(),
-                ),
+            if (!isGuest)
+              ref.watch(userCommunitiesProvider).when(
+                    data: (data) => Expanded(
+                      child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          final community = data[index];
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(community.avatar),
+                            ),
+                            title: Text(community.name),
+                            onTap: () =>
+                                navigateToCommunity(context, community),
+                          );
+                        },
+                      ),
+                    ),
+                    error: (error, stackTrace) =>
+                        ErrorText(error: error.toString()),
+                    loading: () => const Loader(),
+                  ),
           ],
         ),
       ),

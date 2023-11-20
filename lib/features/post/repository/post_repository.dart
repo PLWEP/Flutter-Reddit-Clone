@@ -145,4 +145,16 @@ class PostRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  Stream<List<Post>> fetchGuestPost() {
+    return _posts
+        .orderBy('createdAt', descending: true)
+        .limit(10)
+        .snapshots()
+        .map(
+          (event) => event.docs
+              .map((e) => Post.fromMap(e.data() as Map<String, dynamic>))
+              .toList(),
+        );
+  }
 }

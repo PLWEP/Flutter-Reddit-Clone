@@ -21,6 +21,13 @@ final userPostProvider = StreamProvider.family(
   },
 );
 
+final guestPostProvider = StreamProvider(
+  (ref) {
+    final postController = ref.watch(postControllerProvider.notifier);
+    return postController.fetchGuestPost();
+  },
+);
+
 final postControllerProvider = StateNotifierProvider<PostController, bool>(
   (ref) {
     final postRepository = ref.watch(postRepositoryProvider);
@@ -269,5 +276,9 @@ class PostController extends StateNotifier<bool> {
         Routemaster.of(context).pop();
       },
     );
+  }
+
+  Stream<List<Post>> fetchGuestPost() {
+    return _postRepository.fetchGuestPost();
   }
 }
