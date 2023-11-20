@@ -6,9 +6,8 @@ import 'package:routemaster/routemaster.dart';
 class AddPostScreen extends ConsumerWidget {
   const AddPostScreen({super.key});
 
-  void navigateToType(BuildContext context, String type) {
-    Routemaster.of(context).push('/add-post/$type');
-  }
+  void navigateToType(BuildContext context, String type) =>
+      Routemaster.of(context).push('/add-post/$type');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

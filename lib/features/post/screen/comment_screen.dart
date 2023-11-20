@@ -40,6 +40,7 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
+
     return Scaffold(
       appBar: AppBar(),
       body: ref.watch(getPostByIdProvider(widget.postId)).when(
@@ -58,17 +59,15 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
                       ),
                     ),
                   ref.watch(getPostCommentsProvider(widget.postId)).when(
-                        data: (comments) {
-                          return Expanded(
-                            child: ListView.builder(
-                              itemCount: comments.length,
-                              itemBuilder: (context, index) {
-                                final comment = comments[index];
-                                return CommentCard(comment: comment);
-                              },
-                            ),
-                          );
-                        },
+                        data: (comments) => Expanded(
+                          child: ListView.builder(
+                            itemCount: comments.length,
+                            itemBuilder: (context, index) {
+                              final comment = comments[index];
+                              return CommentCard(comment: comment);
+                            },
+                          ),
+                        ),
                         error: (error, stackTrace) =>
                             ErrorText(error: error.toString()),
                         loading: () => const Loader(),
