@@ -19,42 +19,35 @@ class CommunityListDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider)!;
-    final isGuest = !user.isAuthenticated;
-
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
-            isGuest
-                ? const SignInButton()
-                : ListTile(
-                    title: const Text("Create community"),
-                    leading: const Icon(Icons.add),
-                    onTap: () => navigateToCreateCommunity(context),
-                  ),
-            if (!isGuest)
-              ref.watch(userCommunitiesProvider).when(
-                    data: (data) => Expanded(
-                      child: ListView.builder(
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          final community = data[index];
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(community.avatar),
-                            ),
-                            title: Text(community.name),
-                            onTap: () =>
-                                navigateToCommunity(context, community),
-                          );
-                        },
-                      ),
+            ListTile(
+              title: const Text("Create community"),
+              leading: const Icon(Icons.add),
+              onTap: () => navigateToCreateCommunity(context),
+            ),
+            ref.watch(userCommunitiesProvider).when(
+                  data: (data) => Expanded(
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        final community = data[index];
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(community.avatar),
+                          ),
+                          title: Text(community.name),
+                          onTap: () => navigateToCommunity(context, community),
+                        );
+                      },
                     ),
-                    error: (error, stackTrace) =>
-                        ErrorText(error: error.toString()),
-                    loading: () => const Loader(),
                   ),
+                  error: (error, stackTrace) =>
+                      ErrorText(error: error.toString()),
+                  loading: () => const Loader(),
+                ),
           ],
         ),
       ),

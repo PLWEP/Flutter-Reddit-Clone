@@ -3,7 +3,6 @@ class UserModel {
   final String profilePic;
   final String banner;
   final String uid;
-  final bool isAuthenticated;
   final int karma;
   final List<String> awards;
 
@@ -12,7 +11,6 @@ class UserModel {
     required this.profilePic,
     required this.banner,
     required this.uid,
-    required this.isAuthenticated,
     required this.karma,
     required this.awards,
   });
@@ -31,7 +29,6 @@ class UserModel {
         profilePic: profilePic ?? this.profilePic,
         banner: banner ?? this.banner,
         uid: uid ?? this.uid,
-        isAuthenticated: isAuthenticated ?? this.isAuthenticated,
         karma: karma ?? this.karma,
         awards: awards ?? this.awards,
       );
@@ -41,7 +38,6 @@ class UserModel {
         'profilePic': profilePic,
         'banner': banner,
         'uid': uid,
-        'isAuthenticated': isAuthenticated,
         'karma': karma,
         'awards': awards,
       };
@@ -51,7 +47,6 @@ class UserModel {
         profilePic: map['profilePic'] as String,
         banner: map['banner'] as String,
         uid: map['uid'] as String,
-        isAuthenticated: map['isAuthenticated'] as bool,
         karma: map['karma'] as int,
         awards: List<String>.from(map['awards']),
       );

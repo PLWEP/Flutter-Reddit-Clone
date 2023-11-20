@@ -33,7 +33,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider)!;
     final currentTheme = ref.watch(themeNotifierProvider);
-    final isGuest = !user.isAuthenticated;
 
     return Scaffold(
       appBar: AppBar(
@@ -64,25 +63,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
       drawer: const CommunityListDrawer(),
-      endDrawer: isGuest ? null : const ProfilDrawer(),
-      bottomNavigationBar: isGuest
-          ? null
-          : CupertinoTabBar(
-              activeColor: currentTheme.iconTheme.color,
-              backgroundColor: currentTheme.colorScheme.background,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add),
-                  label: 'Add Post',
-                ),
-              ],
-              onTap: onPageChange,
-              currentIndex: _page,
-            ),
+      endDrawer: const ProfilDrawer(),
+      bottomNavigationBar: CupertinoTabBar(
+        activeColor: currentTheme.iconTheme.color,
+        backgroundColor: currentTheme.colorScheme.background,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add Post',
+          ),
+        ],
+        onTap: onPageChange,
+        currentIndex: _page,
+      ),
       body: Constant.tabWidgets[_page],
     );
   }

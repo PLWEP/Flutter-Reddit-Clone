@@ -8,9 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
-  void signInAsGuest(WidgetRef ref, BuildContext context) =>
-      ref.read(authControllerProvider.notifier).signInAsGuest(context);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = ref.watch(authControllerProvider);
@@ -21,17 +18,6 @@ class LoginScreen extends ConsumerWidget {
           Constant.logoPath,
           height: 40,
         ),
-        actions: [
-          TextButton(
-            onPressed: () => signInAsGuest(ref, context),
-            child: const Text(
-              'Skip',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
       ),
       body: isLoading
           ? const Loader()
