@@ -33,7 +33,7 @@ class StorageRepositorty {
 
       return right(await snapshot.ref.getDownloadURL());
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return left(Failure(e.message!));
     } catch (e) {
       return left(Failure(e.toString()));
     }

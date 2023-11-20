@@ -18,37 +18,30 @@ class PostCard extends ConsumerWidget {
     required this.post,
   });
 
-  void deletePost(BuildContext context, WidgetRef ref) {
-    ref.read(postControllerProvider.notifier).deletePost(context, post);
-  }
+  void deletePost(BuildContext context, WidgetRef ref) =>
+      ref.read(postControllerProvider.notifier).deletePost(context, post);
 
-  void upvotePost(WidgetRef ref) {
-    ref.read(postControllerProvider.notifier).upvote(post);
-  }
+  void upvotePost(WidgetRef ref) =>
+      ref.read(postControllerProvider.notifier).upvote(post);
 
-  void downvotePost(WidgetRef ref) {
-    ref.read(postControllerProvider.notifier).downvote(post);
-  }
+  void downvotePost(WidgetRef ref) =>
+      ref.read(postControllerProvider.notifier).downvote(post);
 
-  void awardPost(WidgetRef ref, String award, BuildContext context) {
-    ref.read(postControllerProvider.notifier).awardPost(
-          post: post,
-          award: award,
-          context: context,
-        );
-  }
+  void awardPost(WidgetRef ref, String award, BuildContext context) =>
+      ref.read(postControllerProvider.notifier).awardPost(
+            post: post,
+            award: award,
+            context: context,
+          );
 
-  void navigateToUser(BuildContext context) {
-    Routemaster.of(context).push('/u/${post.uid}');
-  }
+  void navigateToUser(BuildContext context) =>
+      Routemaster.of(context).push('/u/${post.uid}');
 
-  void navigateToCommunity(BuildContext context) {
-    Routemaster.of(context).push('/r/${post.communityName}');
-  }
+  void navigateToCommunity(BuildContext context) =>
+      Routemaster.of(context).push('/r/${post.communityName}');
 
-  void navigateToComments(BuildContext context) {
-    Routemaster.of(context).push('/post/${post.id}/comments');
-  }
+  void navigateToComments(BuildContext context) =>
+      Routemaster.of(context).push('/post/${post.id}/comments');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
