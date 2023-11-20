@@ -6,7 +6,7 @@ import 'package:flutter_reddit_clone/common/error_text.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
 import 'package:flutter_reddit_clone/features/community/controller/community_controller.dart';
-import 'package:flutter_reddit_clone/features/post/controller/post_controller.dart';
+import 'package:flutter_reddit_clone/features/post/provider/post_provider.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,18 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_reddit_clone/core/constant/firebase_constant.dart';
 import 'package:flutter_reddit_clone/core/failure.dart';
-import 'package:flutter_reddit_clone/core/provider/firebase_provider.dart';
 import 'package:flutter_reddit_clone/core/type_def.dart';
 import 'package:flutter_reddit_clone/models/post_model.dart';
 import 'package:flutter_reddit_clone/models/user_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-
-final userProfileRepositoryProvider = Provider(
-  (ref) => UserProfileRepository(
-    firestore: ref.watch(firestoreProvider),
-  ),
-);
 
 class UserProfileRepository {
   final FirebaseFirestore _firestore;

@@ -3,7 +3,7 @@ import 'package:flutter_reddit_clone/common/error_text.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/common/post_card.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:flutter_reddit_clone/features/post/controller/post_controller.dart';
+import 'package:flutter_reddit_clone/features/post/provider/post_provider.dart';
 import 'package:flutter_reddit_clone/features/post/widget/comment_card.dart';
 import 'package:flutter_reddit_clone/models/post_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

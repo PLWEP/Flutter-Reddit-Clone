@@ -4,29 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/core/enums.dart';
 import 'package:flutter_reddit_clone/core/provider/storage_repository_provider.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:flutter_reddit_clone/features/user%20profle/repository/user_profile_repository.dart';
+import 'package:flutter_reddit_clone/features/user%20profile/repository/user_profile_repository.dart';
 import 'package:flutter_reddit_clone/models/post_model.dart';
 import 'package:flutter_reddit_clone/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
 import 'package:routemaster/routemaster.dart';
-
-final userProfileControllerProvider =
-    StateNotifierProvider<UserProfileController, bool>(
-  (ref) {
-    final userProfileRepository = ref.watch(userProfileRepositoryProvider);
-    final storageRepository = ref.watch(storageRepositoryProvider);
-    return UserProfileController(
-      ref: ref,
-      userProfileRepository: userProfileRepository,
-      storageRepository: storageRepository,
-    );
-  },
-);
-
-final getUserPostProvider = StreamProvider.family((ref, String uid) {
-  return ref.read(userProfileControllerProvider.notifier).getUserPost(uid);
-});
 
 class UserProfileController extends StateNotifier<bool> {
   final UserProfileRepository _userProfileRepository;

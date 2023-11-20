@@ -8,8 +8,8 @@ import 'package:flutter_reddit_clone/features/community/screen/mod_tools_screen.
 import 'package:flutter_reddit_clone/features/home/screen/home_screen.dart';
 import 'package:flutter_reddit_clone/features/post/screen/add_post_type_screen.dart';
 import 'package:flutter_reddit_clone/features/post/screen/comment_screen.dart';
-import 'package:flutter_reddit_clone/features/user%20profle/screen/edit_profile_screen.dart';
-import 'package:flutter_reddit_clone/features/user%20profle/screen/user_profile_screen.dart';
+import 'package:flutter_reddit_clone/features/user%20profile/screen/edit_profile_screen.dart';
+import 'package:flutter_reddit_clone/features/user%20profile/screen/user_profile_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
 final loggedOutRoute = RouteMap(

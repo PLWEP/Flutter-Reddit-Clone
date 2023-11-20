@@ -7,7 +7,7 @@ import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:flutter_reddit_clone/features/user%20profle/controller/user_profile_controller.dart';
+import 'package:flutter_reddit_clone/features/user%20profile/provider/user_profile_provider.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -60,14 +60,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     }
   }
 
-  void save() {
-    ref.read(userProfileControllerProvider.notifier).editProfile(
-          profileFile: profileFile,
-          bannerFile: bannerFile,
-          context: context,
-          name: nameController.text,
-        );
-  }
+  void save() => ref.read(userProfileControllerProvider.notifier).editProfile(
+        profileFile: profileFile,
+        bannerFile: bannerFile,
+        context: context,
+        name: nameController.text,
+      );
 
   @override
   Widget build(BuildContext context) {
