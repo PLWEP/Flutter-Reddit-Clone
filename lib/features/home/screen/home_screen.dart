@@ -18,13 +18,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _page = 0;
 
-  void displayDrawer(BuildContext context) {
-    Scaffold.of(context).openDrawer();
-  }
+  void displayDrawer(BuildContext context) => Scaffold.of(context).openDrawer();
 
-  void displayEndDrawer(BuildContext context) {
-    Scaffold.of(context).openEndDrawer();
-  }
+  void displayEndDrawer(BuildContext context) =>
+      Scaffold.of(context).openEndDrawer();
 
   void onPageChange(int page) {
     setState(() {
@@ -43,31 +40,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: const Text("Home"),
         centerTitle: false,
         leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () => displayDrawer(context),
-            );
-          },
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => displayDrawer(context),
+          ),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: SearchCommunityDelegate(ref),
-              );
-            },
+            onPressed: () => showSearch(
+              context: context,
+              delegate: SearchCommunityDelegate(ref),
+            ),
           ),
-          Builder(builder: (context) {
-            return IconButton(
+          Builder(
+            builder: (context) => IconButton(
               icon: CircleAvatar(
                 backgroundImage: NetworkImage(user.profilePic),
               ),
               onPressed: () => displayEndDrawer(context),
-            );
-          })
+            ),
+          ),
         ],
       ),
       drawer: const CommunityListDrawer(),

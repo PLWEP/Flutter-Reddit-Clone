@@ -7,21 +7,19 @@ import 'package:routemaster/routemaster.dart';
 class ProfilDrawer extends ConsumerWidget {
   const ProfilDrawer({super.key});
 
-  void logOut(WidgetRef ref) {
-    ref.read(authControllerProvider.notifier).logout();
-  }
+  void logOut(WidgetRef ref) =>
+      ref.read(authControllerProvider.notifier).logout();
 
-  void navigateToUserProfile(BuildContext context, String uid) {
-    Routemaster.of(context).push('/u/$uid');
-  }
+  void navigateToUserProfile(BuildContext context, String uid) =>
+      Routemaster.of(context).push('/u/$uid');
 
-  void toggleTheme(WidgetRef ref) {
-    ref.read(themeNotifierProvider.notifier).toggleTheme();
-  }
+  void toggleTheme(WidgetRef ref) =>
+      ref.read(themeNotifierProvider.notifier).toggleTheme();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
+
     return Drawer(
       child: SafeArea(
         child: Column(

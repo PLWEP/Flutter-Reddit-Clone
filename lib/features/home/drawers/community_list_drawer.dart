@@ -11,13 +11,11 @@ import 'package:routemaster/routemaster.dart';
 class CommunityListDrawer extends ConsumerWidget {
   const CommunityListDrawer({super.key});
 
-  void navigateToCreateCommunity(BuildContext context) {
-    Routemaster.of(context).push('/create-community');
-  }
+  void navigateToCreateCommunity(BuildContext context) =>
+      Routemaster.of(context).push('/create-community');
 
-  void navigateToCommunity(BuildContext context, Community community) {
-    Routemaster.of(context).push('/r/${community.name}');
-  }
+  void navigateToCommunity(BuildContext context, Community community) =>
+      Routemaster.of(context).push('/r/${community.name}');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
