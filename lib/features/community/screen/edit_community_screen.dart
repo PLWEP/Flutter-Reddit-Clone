@@ -5,7 +5,7 @@ import 'package:flutter_reddit_clone/common/error_text.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/core/constant/constant.dart';
 import 'package:flutter_reddit_clone/core/utils.dart';
-import 'package:flutter_reddit_clone/features/community/controller/community_controller.dart';
+import 'package:flutter_reddit_clone/features/community/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,19 +49,19 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
 
   void save(
     Community community,
-  ) {
-    ref.read(communityControllerProvider.notifier).editComunity(
-          profileFile: profileFile,
-          bannerFile: bannerFile,
-          community: community,
-          context: context,
-        );
-  }
+  ) =>
+      ref.read(communityControllerProvider.notifier).editComunity(
+            profileFile: profileFile,
+            bannerFile: bannerFile,
+            community: community,
+            context: context,
+          );
 
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(communityControllerProvider);
     final currentTheme = ref.watch(themeNotifierProvider);
+
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
           data: (data) => Scaffold(
             backgroundColor: currentTheme.colorScheme.background,

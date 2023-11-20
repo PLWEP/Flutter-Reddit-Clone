@@ -3,7 +3,7 @@ import 'package:flutter_reddit_clone/common/error_text.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
 import 'package:flutter_reddit_clone/common/sign_in_button.dart';
 import 'package:flutter_reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:flutter_reddit_clone/features/community/controller/community_controller.dart';
+import 'package:flutter_reddit_clone/features/community/provider/auth_provider.dart';
 import 'package:flutter_reddit_clone/models/community_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';

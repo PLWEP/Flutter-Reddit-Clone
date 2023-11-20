@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reddit_clone/common/loader.dart';
-import 'package:flutter_reddit_clone/features/community/controller/community_controller.dart';
+import 'package:flutter_reddit_clone/features/community/provider/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateCommunityScreen extends ConsumerStatefulWidget {
@@ -20,16 +20,16 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
     communityNameController.dispose();
   }
 
-  void createCommunity() {
-    ref.read(communityControllerProvider.notifier).createCommunity(
-          communityNameController.text.trim(),
-          context,
-        );
-  }
+  void createCommunity() =>
+      ref.read(communityControllerProvider.notifier).createCommunity(
+            communityNameController.text.trim(),
+            context,
+          );
 
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(communityControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Community'),

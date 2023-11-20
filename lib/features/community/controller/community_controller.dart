@@ -13,43 +13,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
 
-final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
-  return ref
-      .watch(communityControllerProvider.notifier)
-      .getCommunityByName(name);
-});
-
-final userCommunitiesProvider = StreamProvider(
-  (ref) {
-    final communityController = ref.watch(communityControllerProvider.notifier);
-    return communityController.getUserCommunities();
-  },
-);
-
-final searchCommunitiesProvider = StreamProvider.family(
-  (ref, String query) {
-    final communityController = ref.watch(communityControllerProvider.notifier);
-    return communityController.searchCommunity(query);
-  },
-);
-
-final communityControllerProvider =
-    StateNotifierProvider<CommunityController, bool>(
-  (ref) {
-    final communityRepository = ref.watch(communityRepositoryProvider);
-    final storageRepository = ref.watch(storageRepositoryProvider);
-    return CommunityController(
-      ref: ref,
-      communityRepository: communityRepository,
-      storageRepository: storageRepository,
-    );
-  },
-);
-
-final getCommunityPostProvider = StreamProvider.family((ref, String name) {
-  return ref.read(communityControllerProvider.notifier).getCommunityPost(name);
-});
-
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
   final Ref _ref;
@@ -92,9 +55,8 @@ class CommunityController extends StateNotifier<bool> {
     return _communityRepository.getUserCommunity(uid);
   }
 
-  Stream<Community> getCommunityByName(String name) {
-    return _communityRepository.getCommunityByName(name);
-  }
+  Stream<Community> getCommunityByName(String name) =>
+      _communityRepository.getCommunityByName(name);
 
   void editComunity({
     required File? profileFile,
@@ -137,9 +99,8 @@ class CommunityController extends StateNotifier<bool> {
     );
   }
 
-  Stream<List<Community>> searchCommunity(String query) {
-    return _communityRepository.searchCommunity(query);
-  }
+  Stream<List<Community>> searchCommunity(String query) =>
+      _communityRepository.searchCommunity(query);
 
   void joinCommunity(Community community, BuildContext context) async {
     final user = _ref.read(userProvider)!;
@@ -173,7 +134,6 @@ class CommunityController extends StateNotifier<bool> {
     );
   }
 
-  Stream<List<Post>> getCommunityPost(String name) {
-    return _communityRepository.getCommunityPost(name);
-  }
+  Stream<List<Post>> getCommunityPost(String name) =>
+      _communityRepository.getCommunityPost(name);
 }
