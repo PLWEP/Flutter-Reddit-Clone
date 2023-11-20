@@ -30,6 +30,14 @@ class PostCard extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).downvote(post);
   }
 
+  void awardPost(WidgetRef ref, String award, BuildContext context) {
+    ref.read(postControllerProvider.notifier).awardPost(
+          post: post,
+          award: award,
+          context: context,
+        );
+  }
+
   void navigateToUser(BuildContext context) {
     Routemaster.of(context).push('/u/${post.uid}');
   }
@@ -120,6 +128,23 @@ class PostCard extends ConsumerWidget {
                                 ),
                             ],
                           ),
+                          if (post.awards.isNotEmpty) ...{
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              height: 25,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: post.awards.length,
+                                itemBuilder: (context, index) {
+                                  final award = post.awards[index];
+                                  return Image.asset(
+                                    Constant.awards[award]!,
+                                    height: 25,
+                                  );
+                                },
+                              ),
+                            )
+                          },
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
@@ -228,6 +253,43 @@ class PostCard extends ConsumerWidget {
                                         ErrorText(error: error.toString()),
                                     loading: () => const Loader(),
                                   ),
+                              IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => Dialog(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: GridView.builder(
+                                          shrinkWrap: true,
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 4,
+                                          ),
+                                          itemCount: user.awards.length,
+                                          itemBuilder: (context, index) {
+                                            final award = user.awards[index];
+                                            return GestureDetector(
+                                              onTap: () => awardPost(
+                                                ref,
+                                                award,
+                                                context,
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Image.asset(
+                                                    Constant.awards[award]!),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.card_giftcard),
+                              ),
                             ],
                           )
                         ],

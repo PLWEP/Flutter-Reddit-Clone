@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_reddit_clone/core/constant/firebase_constant.dart';
 import 'package:flutter_reddit_clone/core/failure.dart';
 import 'package:flutter_reddit_clone/core/provider/firebase_provider.dart';
