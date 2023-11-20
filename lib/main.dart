@@ -35,30 +35,29 @@ class _MyAppState extends ConsumerState<MyApp> {
         .getUserData(data.uid)
         .first;
     ref.read(userProvider.notifier).update((state) => userModel);
+    setState(() {});
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ref.watch(authStateChangeProvider).when(
-          data: (data) => MaterialApp.router(
-            title: 'Reddit Clone',
-            theme: ref.watch(themeNotifierProvider),
-            debugShowCheckedModeBanner: false,
-            routerDelegate: RoutemasterDelegate(
-              routesBuilder: (context) {
-                if (data != null) {
-                  getData(ref, data);
-                  if (userModel != null) {
-                    return loggedInRoute;
-                  }
+  Widget build(BuildContext context) => ref.watch(authStateChangeProvider).when(
+        data: (data) => MaterialApp.router(
+          title: 'Reddit Clone',
+          theme: ref.watch(themeNotifierProvider),
+          debugShowCheckedModeBanner: false,
+          routerDelegate: RoutemasterDelegate(
+            routesBuilder: (context) {
+              if (data != null) {
+                getData(ref, data);
+                if (userModel != null) {
+                  return loggedInRoute;
                 }
-                return loggedOutRoute;
-              },
-            ),
-            routeInformationParser: const RoutemasterParser(),
+              }
+              return loggedOutRoute;
+            },
           ),
-          error: (error, stackTrace) => ErrorText(error: error.toString()),
-          loading: () => const Loader(),
-        );
-  }
+          routeInformationParser: const RoutemasterParser(),
+        ),
+        error: (error, stackTrace) => ErrorText(error: error.toString()),
+        loading: () => const Loader(),
+      );
 }

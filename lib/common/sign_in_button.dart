@@ -5,14 +5,10 @@ import 'package:flutter_reddit_clone/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignInButton extends ConsumerWidget {
-  final bool isFromLogin;
-  const SignInButton({super.key, this.isFromLogin = true});
+  const SignInButton({super.key});
 
-  void signInWithGoogle(BuildContext context, WidgetRef ref) {
-    ref
-        .read(authControllerProvider.notifier)
-        .signInWithGoogle(context, isFromLogin);
-  }
+  void signInWithGoogle(BuildContext context, WidgetRef ref) =>
+      ref.read(authControllerProvider.notifier).signInWithGoogle(context);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Padding(
